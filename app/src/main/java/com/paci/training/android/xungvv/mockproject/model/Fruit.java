@@ -5,11 +5,13 @@ public class Fruit {
     private final String name;
     private final String detail;
     private boolean isChecked;
-    public Fruit(int id, String name, String detail, boolean isChecked){
+    private final int fruitImage;
+    public Fruit(int id, String name, String detail, boolean isChecked, int fruitImage){
         this.id = id;
         this.name = name;
         this.detail = detail;
         this.isChecked = isChecked;
+        this.fruitImage = fruitImage;
     }
 
     public String getName(){
@@ -18,6 +20,10 @@ public class Fruit {
 
     public String getDetail(){
         return detail;
+    }
+
+    public int getFruitImage() {
+        return fruitImage;
     }
 
     public boolean isChecked(){
