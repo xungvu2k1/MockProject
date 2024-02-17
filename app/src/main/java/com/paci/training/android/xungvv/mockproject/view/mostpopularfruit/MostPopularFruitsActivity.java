@@ -32,43 +32,22 @@ public class MostPopularFruitsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_most_popular_fruits);
 
-        // khởi tạo viewModel
-//        FruitsViewModel viewModel = new ViewModelProvider(this, new FruitViewModelFactory(new FruitRepository())).get(FruitsViewModel.class);
-        FruitRepository repository = new FruitRepository();
-
-        // Khởi tạo FruitViewModelFactory với FruitRepository
-        FruitViewModelFactory factory = new FruitViewModelFactory(repository);
-
-        // Sử dụng FruitViewModelFactory để khởi tạo FruitsViewModel
-        fruitsViewModel = new ViewModelProvider(this, ViewModelProvider.NewInstanceFactory.getInstance()).get(FruitsViewModel.class);
+        FruitsViewModel fruitsViewModel = new ViewModelProvider(
+                this,
+                ViewModelProvider.Factory.from(FruitsViewModel.initializer)
+        ).get(FruitsViewModel.class);
 
         fruitImage = findViewById(R.id.image_view_most_popular_fruit);
         textViewDetail = findViewById(R.id.tv_detail_most_popular_fruits);
+
+
         RecyclerView mostPopularFruitRecyclerView = findViewById(R.id.rcv_most_popular_fruit);
-
-
-
         mostPopularFruitRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<Fruit> fruits = ;
+        List<Fruit> fruits ;
 
         MostPopularFruitAdapter mostPopularFruitAdapter = new MostPopularFruitAdapter(this, fruits);
         mostPopularFruitRecyclerView.setAdapter(mostPopularFruitAdapter);
 
-        mostPopularFruitAdapter.setOnItemClickListener(new MostPopularFruitAdapter.OnItemClickListener(){
-
-            @Override
-            public void onItemClick(int position, Fruit fruit) {
-                fruitImage.setImageResource(fruit.getFruitImage());
-            }
-        });
-
-        textViewDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MostPopularFruitsActivity.this, DetailActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }
