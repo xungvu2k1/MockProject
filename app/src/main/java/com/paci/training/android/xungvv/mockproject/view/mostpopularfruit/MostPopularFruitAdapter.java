@@ -52,7 +52,11 @@ public class MostPopularFruitAdapter extends RecyclerView.Adapter<MostPopularFru
 
         holder.checkBoxItem.setOnCheckedChangeListener((buttonView, isChecked) -> {
             // Lưu trạng thái mới vào ContentProvider khi checkbox thay đổi
-            holder.checkBoxTextView.setEnabled(true);
+            if (isChecked){
+                holder.checkBoxTextView.setEnabled(true);
+            } else {
+                holder.checkBoxTextView.setEnabled(false);
+            }
         });
     }
 
@@ -72,6 +76,18 @@ public class MostPopularFruitAdapter extends RecyclerView.Adapter<MostPopularFru
             checkBoxItem = (CheckBox) view.findViewById(R.id.check_box_fruit_item);
             checkBoxTextView = (TextView) view.findViewById(R.id.text_view_fruit_item);
 
+            checkBoxTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null ){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            Fruit clickedFruit = fruits.get(position);
+                            listener.onItemClick(position, clickedFruit);
+                        }
+                    }
+                }
+            });
         }
     }
 }

@@ -1,6 +1,8 @@
 package com.paci.training.android.xungvv.mockproject.model;
 
-public class Fruit {
+import java.io.Serializable;
+
+public class Fruit implements Serializable {
     private final int id;
     private final String name;
     private final String detail;
